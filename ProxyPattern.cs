@@ -23,24 +23,24 @@ namespace ProxyPattern
     ///  기본형 프록시
     ///  RealSubject (실제 대상)을 생성자로 받아 처리
     /// </summary>
-    class Proxy_Default : ISubject
+    class NormalProxy : ISubject
     {
         private RealSubject _realsubject;
 
-        public Proxy_Default(RealSubject realsubject)
+        public NormalProxy(RealSubject realsubject)
         {
             _realsubject = realsubject;
         }
 
         public bool CheckAccess()
         {
-            Console.WriteLine("Proxy_Default: 실제 요청을 실행하기 전에 액세스를 확인");
+            Console.WriteLine("NormalProxy: 실제 요청을 실행하기 전에 액세스를 확인");
             return true;
         }
 
         public void LogAccess()
         {
-            Console.WriteLine("Proxy_Default: 요청 시간 기록");
+            Console.WriteLine("NormalProxy: 요청 시간 기록");
         }
 
         public void Request()
@@ -57,23 +57,23 @@ namespace ProxyPattern
     /// 가상 프록시
     /// 객체 초기화가 실제로 필요한 시점에 초기화될수 있도록 지연
     /// </summary>
-    class Proxy_Virtual : ISubject
+    class VirtualProxy : ISubject
     {
         private RealSubject _realsubject;
 
-        public Proxy_Virtual()
+        public VirtualProxy()
         {
         }
 
         public bool CheckAccess()
         {
-            Console.WriteLine("Proxy_Virtual: 실제 요청을 실행하기 전에 액세스를 확인");
+            Console.WriteLine("VirtualProxy: 실제 요청을 실행하기 전에 액세스를 확인");
             return true;
         }
 
         public void LogAccess()
         {
-            Console.WriteLine("Proxy_Virtual: 요청 시간 기록");
+            Console.WriteLine("VirtualProxy: 요청 시간 기록");
         }
 
         public void Request()

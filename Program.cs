@@ -20,14 +20,14 @@ namespace ProxyPattern
             Console.WriteLine();
 
             Console.WriteLine("Client: 기본형 프록시로 동일한 클라이언트 코드 실행");
-            Proxy_Default proxyDefault = new Proxy_Default(realsubject);
-            client.ClientCode(proxyDefault);
+            NormalProxy normalProxy = new NormalProxy(realsubject);
+            client.ClientCode(normalProxy);
 
             Console.WriteLine();
 
             Console.WriteLine("Client: 가상 프록시로 동일한 클라이언트 코드 실행");
-            Proxy_Virtual proxy = new Proxy_Virtual();
-            client.ClientCode(proxy);
+            VirtualProxy virtualProxy = new VirtualProxy();
+            client.ClientCode(virtualProxy);
         }
     }
 }
