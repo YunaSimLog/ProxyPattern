@@ -19,29 +19,69 @@ namespace ProxyPattern
         }
     }
 
-    class Proxy : ISubject
+    /// <summary>
+    ///  기본형 프록시
+    ///  RealSubject (실제 대상)을 생성자로 받아 처리
+    /// </summary>
+    class Proxy_Default : ISubject
     {
         private RealSubject _realsubject;
 
-        public Proxy(RealSubject realsubject)
+        public Proxy_Default(RealSubject realsubject)
         {
             _realsubject = realsubject;
         }
 
         public bool CheckAccess()
         {
-            Console.WriteLine("Proxy: 실제 요청을 실행하기 전에 액세스를 확인");
+            Console.WriteLine("Proxy_Default: 실제 요청을 실행하기 전에 액세스를 확인");
             return true;
         }
 
         public void LogAccess()
         {
-            Console.WriteLine("Proxy: 요청 시간 기록");
+            Console.WriteLine("Proxy_Default: 요청 시간 기록");
         }
 
         public void Request()
         {
-            if(CheckAccess())
+            if (CheckAccess())
+            {
+                _realsubject.Request();
+                LogAccess();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 가상 프록시
+    /// 객체 초기화가 실제로 필요한 시점에 초기화될수 있도록 지연
+    /// </summary>
+    class Proxy_Virtual : ISubject
+    {
+        private RealSubject _realsubject;
+
+        public Proxy_Virtual()
+        {
+        }
+
+        public bool CheckAccess()
+        {
+            Console.WriteLine("Proxy_Virtual: 실제 요청을 실행하기 전에 액세스를 확인");
+            return true;
+        }
+
+        public void LogAccess()
+        {
+            Console.WriteLine("Proxy_Virtual: 요청 시간 기록");
+        }
+
+        public void Request()
+        {
+            if (_realsubject == null)
+                _realsubject = new RealSubject();
+
+            if (CheckAccess())
             {
                 _realsubject.Request();
                 LogAccess();
