@@ -92,7 +92,7 @@ namespace ProxyPattern
     /// <summary>
     /// 보호 프록시
     /// </summary>
-    class ProtectionProxy : ISubject
+    public class ProtectionProxy : ISubject
     {
         RealSubject _realsubject;
         bool _access; // 접근 권한
