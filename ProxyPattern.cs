@@ -89,6 +89,29 @@ namespace ProxyPattern
         }
     }
 
+    /// <summary>
+    /// 보호 프록시
+    /// </summary>
+    class ProtectionProxy : ISubject
+    {
+        RealSubject _realsubject;
+        bool _access; // 접근 권한
+
+        ProtectionProxy(RealSubject realsubject, bool access)
+        {
+            _realsubject = realsubject;
+            _access = access;
+        }
+
+        public void Request()
+        {
+            if (_access)
+            {
+                _realsubject.Request();
+            }
+        }
+    }
+
     public class Client
     {
         public void ClientCode(ISubject subject)
