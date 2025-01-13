@@ -94,7 +94,7 @@ namespace ProxyPattern
     /// </summary>
     public class ProtectionProxy : ISubject
     {
-        RealSubject _realsubject;
+        private RealSubject _realsubject;
         bool _access; // 접근 권한
 
         ProtectionProxy(RealSubject realsubject, bool access)
@@ -109,6 +109,27 @@ namespace ProxyPattern
             {
                 _realsubject.Request();
             }
+        }
+    }
+
+    public class LoggingProxy : ISubject
+    {
+        RealSubject _realSubject;
+
+        LoggingProxy(RealSubject realSubject)
+        {
+            _realSubject = realSubject;
+        }
+
+        public void Request()
+        {
+            Console.WriteLine("로깅.....");
+
+            _realSubject.Request();
+
+            Console.WriteLine("프록시 객체 액션 수행!!");
+
+            Console.WriteLine("로깅.....");
         }
     }
 
